@@ -339,8 +339,8 @@ Table of Contents
    and "ns2.example.com".
 
    The host and network first need mutual support one of the mechanisms
-   described in learning (Section 4).  Shown in Figure 1 is learning
-   using DNR and PvD.
+   described in Section 4.  Shown in Figure 1 is learning using DNR and
+   PvD.
 
    Validation is then perfomed using either Public DNS (Section 7.1.1)
    or DNSSEC (Section 7.1.2).
@@ -537,7 +537,7 @@ Table of Contents
    If an internal zone name (e.g., internal.example.com) is used with
    this specification and a public certificate is obtained for
    validation, that internal zone name will exist in Certificate
-   Transparency [RFC9162] logs.  It should be noted, however, that this
+   Transparency logs [RFC9162].  It should be noted, however, that this
    specification does not leak individual host names (e.g.,
    www.internal.example.com) into the Certificate Transparancy logs or
    to public DNS resolvers.
