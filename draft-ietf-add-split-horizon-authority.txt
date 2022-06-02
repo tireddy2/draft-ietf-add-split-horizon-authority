@@ -24,6 +24,18 @@ Abstract
    for these domains.  This specification describes how clients can
    confirm the local resolver's authority over these domains.
 
+Discussion Venues
+
+   This note is to be removed before publishing as an RFC.
+
+   Discussion of this document takes place on the Adaptive DNS Discovery
+   Working Group mailing list (add@ietf.org), which is archived at
+   https://mailarchive.ietf.org/arch/browse/add/.
+
+   Source for this draft and an issue tracker can be found at
+   https://github.com/ietf-wg-add/draft-ietf-add-split-horizon-
+   authority.
+
 Status of This Memo
 
    This Internet-Draft is submitted in full conformance with the
