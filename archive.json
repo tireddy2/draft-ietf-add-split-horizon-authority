@@ -1,0 +1,96 @@
+{
+  "magic": "E!vIA5L86J2I",
+  "timestamp": "2022-06-05T01:40:20.843015+00:00",
+  "repo": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
+  "labels": [
+    {
+      "name": "design",
+      "description": "",
+      "color": "1d76db"
+    },
+    {
+      "name": "documentation",
+      "description": "Improvements or additions to documentation",
+      "color": "0075ca"
+    },
+    {
+      "name": "duplicate",
+      "description": "This issue or pull request already exists",
+      "color": "cfd3d7"
+    },
+    {
+      "name": "editorial",
+      "description": "",
+      "color": "41d366"
+    },
+    {
+      "name": "enhancement",
+      "description": "New feature or request",
+      "color": "a2eeef"
+    },
+    {
+      "name": "help wanted",
+      "description": "Extra attention is needed",
+      "color": "008672"
+    },
+    {
+      "name": "out of scope",
+      "description": "Out of scope of the WG Charter",
+      "color": "e99695"
+    },
+    {
+      "name": "parked",
+      "description": "Recorded but not being worked on",
+      "color": "f9d0c4"
+    },
+    {
+      "name": "question",
+      "description": "Further information is requested",
+      "color": "d876e3"
+    }
+  ],
+  "issues": [],
+  "pulls": [
+    {
+      "number": 1,
+      "id": "PR_kwDOHbyYm845AIzc",
+      "title": "General text and formatting cleanup",
+      "url": "https://github.com/ietf-wg-add/draft-ietf-add-split-horizon-authority/pull/1",
+      "state": "OPEN",
+      "author": "bemasc",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Includes:\r\n* Text adjustments for grammar and clarity\r\n* Replacing \"public\" resolver with \"external\"\r\n* Changes to references and blockquotes\r\n* Made diagrams narrower",
+      "createdAt": "2022-06-02T20:34:44Z",
+      "updatedAt": "2022-06-03T09:24:36Z",
+      "baseRepository": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
+      "baseRefName": "main",
+      "baseRefOid": "c4057ad3971b4a6eff99648a5fa3ab307fbb6b91",
+      "headRepository": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
+      "headRefName": "bemasc-cleanup",
+      "headRefOid": "c31a9fa9a6e42cf4352dff11bfca39f482657759",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [
+        {
+          "author": "bemasc",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@tireddy2 @danwing Please review",
+          "createdAt": "2022-06-02T20:35:43Z",
+          "updatedAt": "2022-06-02T20:35:43Z"
+        },
+        {
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Changes look good to me. ",
+          "createdAt": "2022-06-03T09:24:36Z",
+          "updatedAt": "2022-06-03T09:24:36Z"
+        }
+      ],
+      "reviews": []
+    }
+  ]
+}
