@@ -5,12 +5,12 @@
 ADD                                                             T. Reddy
 Internet-Draft                                                    Akamai
 Intended status: Standards Track                                 D. Wing
-Expires: 4 December 2022                                          Citrix
+Expires: 8 December 2022                                          Citrix
                                                                 K. Smith
                                                                 Vodafone
                                                              B. Schwartz
                                                                   Google
-                                                             2 June 2022
+                                                             6 June 2022
 
 
      Establishing Local DNS Authority in Split-Horizon Environments
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 December 2022.
+   This Internet-Draft will expire on 8 December 2022.
 
 Copyright Notice
 
@@ -433,8 +433,8 @@ Table of Contents
       resolver over a secure transport, so these ADNs are authorized.
       When the client connects using an encrypted transport as indicated
       in DNR [I-D.ietf-add-dnr], it will authenticate the server to its
-      name using TLS, and send queries to resolve any names that fall
-      within the dnsZones from PvD.
+      name using TLS ([RFC8310], Section 8), and send queries to resolve
+      any names that fall within the dnsZones from PvD.
 
    +---------+                  +--------------------+  +----------+
    | Client  |                  | Network's          |  | External |
@@ -481,8 +481,8 @@ Table of Contents
       example.com, so these ADNs are authorized.  When the client
       connects using an encrypted transport as indicated in DNR
       [I-D.ietf-add-dnr], it will authenticate the server to its name
-      using TLS, and send queries to resolve any names that fall within
-      the dnsZones from PvD.
+      using TLS ([RFC8310], Section 8), and send queries to resolve any
+      names that fall within the dnsZones from PvD.
 
    +---------+                                    +--------------------+
    | Client  |                                    | Network's          |
@@ -657,6 +657,11 @@ Table of Contents
    [RFC7686]  Appelbaum, J. and A. Muffett, "The ".onion" Special-Use
               Domain Name", RFC 7686, DOI 10.17487/RFC7686, October
               2015, <https://www.rfc-editor.org/info/rfc7686>.
+
+   [RFC8310]  Dickinson, S., Gillmor, D., and T. Reddy, "Usage Profiles
+              for DNS over TLS and DNS over DTLS", RFC 8310,
+              DOI 10.17487/RFC8310, March 2018,
+              <https://www.rfc-editor.org/info/rfc8310>.
 
    [RFC8499]  Hoffman, P., Sullivan, A., and K. Fujiwara, "DNS
               Terminology", BCP 219, RFC 8499, DOI 10.17487/RFC8499,
