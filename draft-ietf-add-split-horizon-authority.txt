@@ -5,12 +5,12 @@
 ADD                                                             T. Reddy
 Internet-Draft                                                    Akamai
 Intended status: Standards Track                                 D. Wing
-Expires: 4 December 2022                                          Citrix
+Expires: 8 December 2022                                          Citrix
                                                                 K. Smith
                                                                 Vodafone
                                                              B. Schwartz
                                                                   Google
-                                                             2 June 2022
+                                                             6 June 2022
 
 
      Establishing Local DNS Authority in Split-Horizon Environments
@@ -51,7 +51,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 4 December 2022.
+   This Internet-Draft will expire on 8 December 2022.
 
 Copyright Notice
 
@@ -80,13 +80,13 @@ Table of Contents
      4.4.  Split DNS Configuration for IKEv2
    5.  Establishing Local DNS Authority
    6.  Validating Authority over Local Domain Hints
-     6.1.  Using Pre-configured Public Resolver
+     6.1.  Using a Pre-configured External Resolver
      6.2.  Using DNSSEC
    7.  Examples of Split-Horizon DNS Configuration
      7.1.  Split-Horizon Entire Zone
-       7.1.1.  Verification using Public Resolver
+       7.1.1.  Verification using an external resolver
        7.1.2.  Verification using DNSSEC
-     7.2.  Split-Horizon Only Subdomain of Zone
+     7.2.  Internal-only Subdomains
    8.  Validation with IKEv2
    9.  Security Considerations
    10. IANA Considerations
@@ -179,9 +179,10 @@ Table of Contents
 
 3.  Scope
 
-   The protocol in this document allows the domain owner to create a
-   split-horizon DNS.  Other entities which do not own the domain are
-   detected by the client.  Thus, DNS filtering is not enabled by this
+   The protocol in this document is designed to support the ability of a
+   domain owner to create or authorize a split-horizon view of their
+   domain.  The protocol does not support split-horizon views created by
+   any other entity.  Thus, DNS filtering is not enabled by this
    protocol.
 
 4.  Local Domain Hint Mechanisms
@@ -195,7 +196,7 @@ Table of Contents
 4.1.  DHCP Options
 
    There are several DHCP options that convey local domain hints of
-   different kinds.  The most directly relevant is "RDNSS Selection"
+   different kinds.  The most directly relevant is RDNSS Selection
    [RFC6731], which provides "a list of domains ... about which the
    RDNSS has special knowledge", along with a "High", "Medium", or "Low"
    preference for each name.  The specification notes the difficulty of
@@ -205,8 +206,6 @@ Table of Contents
    |  received over the interface is implementation and/or node
    |  deployment dependent, and the details of determining that trust
    |  are beyond the scope of this specification.
-   |  
-   |  -- RFC6731
 
    Other local domain hints in DHCP include the "Domain Name" [RFC2132],
    "Access Network Domain Name" [RFC5986], "Client FQDN"
@@ -236,17 +235,16 @@ Table of Contents
    SSID, IP subnet assigned, DNS server IP address or name, and other
    similar mechanisms.  For example, one existing implementation
    determines the host has joined an internal network because the DHCP-
-   assigned IP address belongs to the company's IP address (as assigned
-   by the regional IP addressing authority) and the DHCP-advertised DNS
-   IP address is one used by IT at that network.  Other mechanisms exist
-   in other products but are not interesting to this specification;
-   rather what is interesting is this step to determine "we have joined
-   the internal corporate network" occurred and the DNS server is
-   configured as authoritative for certain DNS zones (e.g.,
-   *.example.com).
+   assigned IP address belongs to the company's IP range (as assigned by
+   the regional IP addressing authority) and the DHCP-advertised DNS IP
+   address is one used by IT at that network.  Other mechanisms exist in
+   other products but are not interesting to this specification; rather
+   what is interesting is this step to determine "we have joined the
+   internal corporate network" occurred and the DNS server is configured
+   as authoritative for certain DNS zones (e.g., *.example.com).
 
    Because a rogue network can simulate all or most of the above
-   characteristics this specification details how to validate these
+   characteristics, this specification details how to validate these
    claims in Section 6.
 
 4.3.  Provisioning Domains dnsZones
@@ -266,15 +264,14 @@ Table of Contents
    To prevent abuse, the specification notes various possible
    restrictions on the use of this attribute:
 
-   |  (Section 5) If a client is configured by local policy to only
-   |  accept a limited set of INTERNAL_DNS_DOMAIN values, the client
-   |  MUST ignore any other INTERNAL_DNS_DOMAIN values."
+   |  If a client is configured by local policy to only accept a limited
+   |  set of INTERNAL_DNS_DOMAIN values, the client MUST ignore any
+   |  other INTERNAL_DNS_DOMAIN values.  ([RFC8598], Section 5)
    |  
-   |  (Section 9) IKE clients MAY want to require whitelisted domains
-   |  for Top-Level Domains (TLDs) and Second-Level Domains (SLDs) to
-   |  further prevent malicious DNS redirections for well-known domains.
-   |  
-   |  -- RFC8598
+   |  IKE clients MAY want to require whitelisted domains for Top-Level
+   |  Domains (TLDs) and Second-Level Domains (SLDs) to further prevent
+   |  malicious DNS redirections for well-known domains.  ([RFC8598],
+   |  Section 9)
 
    Within these guidelines, a client could adopt a local policy of
    accepting INTERNAL_DNS_DOMAIN values only when it can validate the
@@ -312,7 +309,7 @@ Table of Contents
    that is not subject to interference by the local network operator.
    Two possible tamperproof resolution methods are presented below.
 
-6.1.  Using Pre-configured Public Resolver
+6.1.  Using a Pre-configured External Resolver
 
    The client sends the NS query to a pre-configured resolver that is
    external to the network, over a secure transport.  Clients SHOULD
@@ -325,23 +322,24 @@ Table of Contents
    choice (e.g. querying one of the network-provided resolvers,
    performing iterative resolution locally), and performs full DNSSEC
    validation locally [RFC6698].  The result is processed based on its
-   DNSSEC validation state (Section 4.3 of [RFC4035]):
+   DNSSEC validation state ([RFC4035], Section 4.3):
 
-      *Secure*: the response is used for validation.
+      *Secure*: The response is used for validation.
 
-      *Bogus* or *Indeterminate*: the response is rejected and
+      *Bogus* or *Indeterminate*: The response is rejected and
       validation is considered to have failed.
 
-      *Insecure*: the client SHOULD retry the validation process using a
+      *Insecure*: The client SHOULD retry the validation process using a
       different method, such as the one in Section 6.1, to ensure
       compatibility with unsigned names.
 
 7.  Examples of Split-Horizon DNS Configuration
 
-   Two examples are shown below.  The first example showing an company
-   with an internal-only DNS server resolving the entire zone for that
-   company (e.g., *.example.com) the second example resolving only a
-   subdomain of the company's zone (e.g., *.internal.example.com).
+   Two examples are shown below.  The first example shows a company with
+   an internal-only DNS server that claims the entire zone for that
+   company (e.g., *.example.com).  In the second example, the internal
+   servers resolves only a subdomain of the company's zone (e.g.,
+   *.internal.example.com).
 
 7.1.  Split-Horizon Entire Zone
 
@@ -350,23 +348,23 @@ Table of Contents
    Today, on the Internet it publishes two NS records, "ns1.example.com"
    and "ns2.example.com".
 
-   The host and network first need mutual support one of the mechanisms
-   described in Section 4.  Shown in Figure 1 is learning using DNR and
-   PvD.
+   First, the host and network both need to support one of the discovery
+   mechanisms described in Section 4.  Figure 1 shows discovery using
+   DNR and PvD.
 
-   Validation is then perfomed using either Public DNS (Section 7.1.1)
-   or DNSSEC (Section 7.1.2).
+   Validation is then perfomed using either an external resolver
+   (Section 7.1.1) or DNSSEC (Section 7.1.2).
 
-      *steps 1-2*: The client determines the network's DNS server
+      *Steps 1-2*: The client determines the network's DNS server
       (ns1.example.com) and Provisioning Domain (pvd.example.com) using
       DNR [I-D.ietf-add-dnr] and PvD [RFC8801], using one of DNR Router
       Solicitation, DHCPv4, or DHCPv6.
 
-      *step 3-5*: The client connects to the DNR-learned DNS server
-      (ns1.example.com), validates its certificate, and queries for
-      pvd.example.com.
+      *Step 3-5*: The client connects to the DNS server learned from DNR
+      (ns1.example.com), validates its certificate, and sends it a query
+      for the address of pvd.example.com.
 
-      *steps 6-7*: The client connects to the PvD server, validates its
+      *Steps 6-7*: The client connects to the PvD server, validates its
       certificate, and retrieves the provisioning domain JSON
       information indicated by the associated PvD.  The PvD contains:
 
@@ -380,69 +378,67 @@ Table of Contents
       The JSON keys "identifier", "expires", and "prefixes" are defined
       in [RFC8801].
 
-+---------+            +--------------------+  +------------+ +--------+
-| client  |            | Network            |  | Network    | | Router |
-|         |            | encrypted resolver |  | PvD server | |        |
-+---------+            +--------------------+  +------------+ +--------+
-     |                                     |         |            |
-     | Router Solicitation or              |         |            |
-     | DHCPv4/DHCPv6 (1)                   |         |            |
-     |----------------------------------------------------------->|
-     |                                     |         |            |
-     |  Response with DNR hostnames &      |         |            |
-     |  PvD FQDN (2)                       |         |            |
-     |<-----------------------------------------------------------|
-     | ----------------------------\       |         |            |
-     |-| now knows DNR hostnames & |       |         |            |
-     | | PvD FQDN                  |       |         |            |
-     | |---------------------------/       |         |            |
-     |                                     |         |            |
-     | TLS connection to ns1.example.com (3)         |            |
-     |------------------------------------>|         |            |
-     | ---------------------------\        |         |            |
-     |-| validate TLS certificate |        |         |            |
-     | |--------------------------|        |         |            |
-     |                                     |         |            |
-     | resolve pvd.example.com  (4)        |         |            |
-     |------------------------------------>|         |            |
-     |                                     |         |            |
-     |            A or AAAA records (5)    |         |            |
-     |<------------------------------------|         |            |
-     |                                     |         |            |
-     | https://pvd.example.com/.well-known/pvd (6)   |            |
-     |---------------------------------------------->|            |
-     |                                     |         |            |
-     |  200 OK (JSON Additional Information) (7)     |            |
-     |<----------------------------------------------|            |
-     | -----------------------\            |         |            |
-     |-| dnsZones=example.com |            |         |            |
-     | |----------------------|            |         |            |
+   +---------+         +--------------------+  +------------+ +--------+
+   | Client  |         | Network's          |  | Network    | | Router |
+   |         |         | Encrypted Resolver |  | PvD Server | |        |
+   +---------+         +--------------------+  +------------+ +--------+
+      |                                     |         |            |
+      | Router Solicitation or              |         |            |
+      | DHCPv4/DHCPv6 (1)                   |         |            |
+      |----------------------------------------------------------->|
+      |                                     |         |            |
+      |  Response with DNR hostnames &      |         |            |
+      |  PvD FQDN (2)                       |         |            |
+      |<-----------------------------------------------------------|
+      | ----------------------------\       |         |            |
+      |-| now knows DNR hostnames & |       |         |            |
+      | | PvD FQDN                  |       |         |            |
+      | |---------------------------/       |         |            |
+      |                                     |         |            |
+      | TLS connection to ns1.example.com (3)         |            |
+      |------------------------------------>|         |            |
+      | ---------------------------\        |         |            |
+      |-| validate TLS certificate |        |         |            |
+      | |--------------------------|        |         |            |
+      |                                     |         |            |
+      | resolve pvd.example.com  (4)        |         |            |
+      |------------------------------------>|         |            |
+      |                                     |         |            |
+      |            A or AAAA records (5)    |         |            |
+      |<------------------------------------|         |            |
+      |                                     |         |            |
+      | https://pvd.example.com/.well-known/pvd (6)   |            |
+      |---------------------------------------------->|            |
+      |                                     |         |            |
+      |  200 OK (JSON Additional Information) (7)     |            |
+      |<----------------------------------------------|            |
+      | -----------------------\            |         |            |
+      |-| dnsZones=example.com |            |         |            |
+      | |----------------------|            |         |            |
 
-           Figure 1: Learning Local Claims of DNS Authority
+              Figure 1: Learning Local Claims of DNS Authority
 
-7.1.1.  Verification using Public Resolver
+7.1.1.  Verification using an external resolver
 
    The figure below shows the steps performed to verify the local claims
-   of DNS authority using a public resolver.
+   of DNS authority using an external resolver.
 
-      *Steps 1-2*: The client uses an encrypted DNS connection to a
-      public resolver (e.g., 1.1.1.1) to issue NS queries for the
+      *Steps 1-2*: The client uses an encrypted DNS connection to an
+      external resolver (e.g., 1.1.1.1) to issue NS queries for the
       domains in dnsZones.  The NS lookup for "example.com" will return
       "ns1.example.com" and "ns2.example.com".
 
-      *Step 3*: As the network-provided nameservers are the same as the
-      names retrieved from the public resolver and the network-
-      designated resolver's certificate includes at least one of the
-      names retrieved from the public resolver, the client has finished
-      validation that the nameservers signaled in [I-D.ietf-add-dnr] and
-      [RFC8801] are owned and managed by the same entity that published
-      the NS records on the Internet.  The endpoint will then use that
-      information from [I-D.ietf-add-dnr] and [RFC8801] to resolve names
-      within dnsZones.
+      *Step 3*: The network-provided DNS servers are listed in the NS
+      record for example.com, which was retrieved from an external
+      resolver over a secure transport, so these ADNs are authorized.
+      When the client connects using an encrypted transport as indicated
+      in DNR [I-D.ietf-add-dnr], it will authenticate the server to its
+      name using TLS ([RFC8310], Section 8), and send queries to resolve
+      any names that fall within the dnsZones from PvD.
 
    +---------+                  +--------------------+  +----------+
-   | client  |                  | Network            |  |  public  |
-   |         |                  | encrypted resolver |  | resolver |
+   | Client  |                  | Network's          |  | External |
+   |         |                  | Encrypted Resolver |  | Resolver |
    +---------+                  +--------------------+  +----------+
         |                                          |         |
         | TLS connection                           |         |
@@ -467,7 +463,7 @@ Table of Contents
         |----------------------------------------->|         |
         |                                          |         |
 
-              Figure 2: Verifying Claims using Public Resolver
+           Figure 2: Verifying claims using an external resolver
 
 7.1.2.  Verification using DNSSEC
 
@@ -480,54 +476,51 @@ Table of Contents
       response containing "ns1.example.com" and "ns2.example.com".  The
       client then performs full DNSSEC validation locally.
 
-      *Step 3*: As the DNSSEC validation is successful and the network-
-      provided nameservers are the same as the names in the DNSSEC
-      response, and the network-designated resolver's certificate
-      includes at least one of the names returned in the DNSSEC
-      response, the client has finished validation that the nameservers
-      signaled in [I-D.ietf-add-dnr] and [RFC8801] are owned and managed
-      by the same entity that published the NS records on the Internet.
-      The endpoint will then use that information from
-      [I-D.ietf-add-dnr] and [RFC8801] to resolve names within dnsZones.
+      *Step 3*: The DNSSEC validation is successful and the network-
+      provided DNS servers are listed in the signed NS record for
+      example.com, so these ADNs are authorized.  When the client
+      connects using an encrypted transport as indicated in DNR
+      [I-D.ietf-add-dnr], it will authenticate the server to its name
+      using TLS ([RFC8310], Section 8), and send queries to resolve any
+      names that fall within the dnsZones from PvD.
 
-+---------+                                                +--------------------+
-| client  |                                                | Network            |
-|         |                                                | encrypted resolver |
-+---------+                                                +--------------------+
-     |                                                                |
-     | DNSSEC OK (DO), NS? example.com  (1)                           |
-     |--------------------------------------------------------------->|
-     |                                                                |
-     | NS=ns1.example.com,ns2.example.com, Signed Answer (RRSIG) (2)  |
-     |<---------------------------------------------------------------|
-     | -----------------------------------\                           |
-     |-| DNSKEY+NS matches RRSIG, use NS  |                           |
-     | |----------------------------------|                           |
-     | -------------------------------\                               |
-     |-| both DNR ADNs are authorized |                               |
-     | |------------------------------|                               |
-     | ----------------------\                                        |
-     |-| finished validation |                                        |
-     | |---------------------|                                        |
-     |                                                                |
-     | use encrypted network-designated resolver for example.com (3)  |
-     |--------------------------------------------------------------->|
-     |                                                                |
+   +---------+                                    +--------------------+
+   | Client  |                                    | Network's          |
+   |         |                                    | Encrypted Resolver |
+   +---------+                                    +--------------------+
+     |                                                               |
+     | DNSSEC OK (DO), NS? example.com  (1)                          |
+     |-------------------------------------------------------------->|
+     |                                                               |
+     | NS=ns1.example.com,ns2.example.com, Signed Answer (RRSIG) (2) |
+     |<--------------------------------------------------------------|
+     | -----------------------------------\                          |
+     |-| DNSKEY+NS matches RRSIG, use NS  |                          |
+     | |----------------------------------|                          |
+     | -------------------------------\                              |
+     |-| both DNR ADNs are authorized |                              |
+     | |------------------------------|                              |
+     | ----------------------\                                       |
+     |-| finished validation |                                       |
+     | |---------------------|                                       |
+     |                                                               |
+     | use encrypted network-designated resolver for example.com (3) |
+     |-------------------------------------------------------------->|
+     |                                                               |
 
-               Figure 3: Verifying Claims using DNSSEC
+                  Figure 3: Verifying claims using DNSSEC
 
-7.2.  Split-Horizon Only Subdomain of Zone
+7.2.  Internal-only Subdomains
 
-   A subdomain can also be used for all internal DNS names (e.g., the
-   zone internal.example.com exists only on the internal DNS server).
-   For successful validation described in this document the the internal
-   DNS server will need a certificate signed by a CA trusted by the
-   client.
+   In many split-horizon deployments, all non-public domain names are
+   placed in a separate child zone (e.g., internal.example.com).  In
+   this configuration, the message flow is similar to Section 7.1,
+   except that queries for hosts not within the subdomain (e.g.,
+   www.example.com) are sent to the external resolver rather than
+   resolver for internal.example.com.
 
-   For such a name internal.example.com the message flow is similar to
-   Section 7.1 the difference is that queries for hosts not within the
-   subdomain (www.example.com) are sent to the public resolver rather
-   than resolver for internal.example.com.
+   As in Section 7.1, the internal DNS server will need a certificate
+   signed by a CA trusted by the client.
 
 8.  Validation with IKEv2
 
@@ -551,8 +544,8 @@ Table of Contents
    validation, that internal zone name will exist in Certificate
    Transparency logs [RFC9162].  It should be noted, however, that this
    specification does not leak individual host names (e.g.,
-   www.internal.example.com) into the Certificate Transparancy logs or
-   to public DNS resolvers.
+   www.internal.example.com) into the Certificate Transparency logs or
+   to external DNS resolvers.
 
 10.  IANA Considerations
 
@@ -664,6 +657,11 @@ Table of Contents
    [RFC7686]  Appelbaum, J. and A. Muffett, "The ".onion" Special-Use
               Domain Name", RFC 7686, DOI 10.17487/RFC7686, October
               2015, <https://www.rfc-editor.org/info/rfc7686>.
+
+   [RFC8310]  Dickinson, S., Gillmor, D., and T. Reddy, "Usage Profiles
+              for DNS over TLS and DNS over DTLS", RFC 8310,
+              DOI 10.17487/RFC8310, March 2018,
+              <https://www.rfc-editor.org/info/rfc8310>.
 
    [RFC8499]  Hoffman, P., Sullivan, A., and K. Fujiwara, "DNS
               Terminology", BCP 219, RFC 8499, DOI 10.17487/RFC8499,
