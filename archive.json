@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-06-05T01:40:20.843015+00:00",
+  "timestamp": "2022-06-07T01:24:48.206417+00:00",
   "repo": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
   "labels": [
     {
@@ -56,24 +56,26 @@
       "id": "PR_kwDOHbyYm845AIzc",
       "title": "General text and formatting cleanup",
       "url": "https://github.com/ietf-wg-add/draft-ietf-add-split-horizon-authority/pull/1",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "bemasc",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Includes:\r\n* Text adjustments for grammar and clarity\r\n* Replacing \"public\" resolver with \"external\"\r\n* Changes to references and blockquotes\r\n* Made diagrams narrower",
       "createdAt": "2022-06-02T20:34:44Z",
-      "updatedAt": "2022-06-03T09:24:36Z",
+      "updatedAt": "2022-06-06T18:04:06Z",
       "baseRepository": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
       "baseRefName": "main",
       "baseRefOid": "c4057ad3971b4a6eff99648a5fa3ab307fbb6b91",
       "headRepository": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
       "headRefName": "bemasc-cleanup",
-      "headRefOid": "c31a9fa9a6e42cf4352dff11bfca39f482657759",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "f4ec6fcd18c528c4a90c23a500eb0915ed7e4660",
+      "closedAt": "2022-06-06T18:04:00Z",
+      "mergedAt": "2022-06-06T18:04:00Z",
+      "mergedBy": "bemasc",
+      "mergeCommit": {
+        "oid": "b53b5e0740f227a1f5de908481e5975059c241c6"
+      },
       "comments": [
         {
           "author": "bemasc",
@@ -90,7 +92,127 @@
           "updatedAt": "2022-06-03T09:24:36Z"
         }
       ],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOHbyYm847Z3yY",
+          "commit": {
+            "abbreviatedOid": "c31a9fa"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-06-06T13:46:43Z",
+          "updatedAt": "2022-06-06T13:53:00Z",
+          "comments": [
+            {
+              "originalPosition": 297,
+              "body": "I suggest replacing TLS with PKIX or refer to https://datatracker.ietf.org/doc/html/rfc8310#section-8.",
+              "createdAt": "2022-06-06T13:46:43Z",
+              "updatedAt": "2022-06-06T13:53:00Z"
+            },
+            {
+              "originalPosition": 342,
+              "body": "I suggest replacing TLS with PKIX or refer to https://datatracker.ietf.org/doc/html/rfc8310#section-8.",
+              "createdAt": "2022-06-06T13:52:55Z",
+              "updatedAt": "2022-06-06T13:53:00Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHbyYm847acPa",
+          "commit": {
+            "abbreviatedOid": "c31a9fa"
+          },
+          "author": "bemasc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-06-06T15:25:28Z",
+          "updatedAt": "2022-06-06T15:25:28Z",
+          "comments": [
+            {
+              "originalPosition": 297,
+              "body": "OK, added reference.",
+              "createdAt": "2022-06-06T15:25:28Z",
+              "updatedAt": "2022-06-06T15:25:28Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHbyYm847acR6",
+          "commit": {
+            "abbreviatedOid": "c31a9fa"
+          },
+          "author": "bemasc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-06-06T15:25:34Z",
+          "updatedAt": "2022-06-06T15:25:35Z",
+          "comments": [
+            {
+              "originalPosition": 342,
+              "body": "OK, added reference.",
+              "createdAt": "2022-06-06T15:25:35Z",
+              "updatedAt": "2022-06-06T15:25:35Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHbyYm847a3me",
+          "commit": {
+            "abbreviatedOid": "f4ec6fc"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-06-06T16:53:53Z",
+          "updatedAt": "2022-06-06T16:53:53Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "id": "PR_kwDOHbyYm845MCoF",
+      "title": "Adjust text based on feedback on the adoption thread",
+      "url": "https://github.com/ietf-wg-add/draft-ietf-add-split-horizon-authority/pull/2",
+      "state": "OPEN",
+      "author": "bemasc",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "From Paul Wouters:\r\n> >    Clients SHOULD\r\n> >    apply whatever acceptance rules they would otherwise apply when using\r\n> >    this resolver (e.g. checking the AD bit, validating RRSIGs).\r\n>\r\n...\r\n> This \"SHOULD\" should therefor be a \"MUST\"\r\n\r\nFrom Michael Richardson:\r\n> The document does a really poor job of defining split-horizon DNS.",
+      "createdAt": "2022-06-06T18:59:38Z",
+      "updatedAt": "2022-06-06T20:27:31Z",
+      "baseRepository": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
+      "baseRefName": "main",
+      "baseRefOid": "b53b5e0740f227a1f5de908481e5975059c241c6",
+      "headRepository": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
+      "headRefName": "bemasc-feedback",
+      "headRefOid": "194b3685ec31fc922e60c33f44880abd455b8827",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHbyYm847b99S",
+          "commit": {
+            "abbreviatedOid": "194b368"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-06-06T20:27:31Z",
+          "updatedAt": "2022-06-06T20:27:31Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
