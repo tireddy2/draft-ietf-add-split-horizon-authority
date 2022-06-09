@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-06-07T01:24:48.206417+00:00",
+  "timestamp": "2022-06-09T01:26:39.994221+00:00",
   "repo": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
   "labels": [
     {
@@ -63,7 +63,7 @@
       "labels": [],
       "body": "Includes:\r\n* Text adjustments for grammar and clarity\r\n* Replacing \"public\" resolver with \"external\"\r\n* Changes to references and blockquotes\r\n* Made diagrams narrower",
       "createdAt": "2022-06-02T20:34:44Z",
-      "updatedAt": "2022-06-06T18:04:06Z",
+      "updatedAt": "2022-06-08T14:32:21Z",
       "baseRepository": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
       "baseRefName": "main",
       "baseRefOid": "c4057ad3971b4a6eff99648a5fa3ab307fbb6b91",
@@ -171,6 +171,46 @@
           "createdAt": "2022-06-06T16:53:53Z",
           "updatedAt": "2022-06-06T16:53:53Z",
           "comments": []
+        },
+        {
+          "id": "PRR_kwDOHbyYm847dWCD",
+          "commit": {
+            "abbreviatedOid": "c31a9fa"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-06-07T06:08:59Z",
+          "updatedAt": "2022-06-07T06:08:59Z",
+          "comments": [
+            {
+              "originalPosition": 180,
+              "body": "Replace \"validates its certificate\" with \"it will authenticate the server to its name using TLS (Section 8 of RFC8310])\" or modify this step to align with the step in other examples. ",
+              "createdAt": "2022-06-07T06:08:59Z",
+              "updatedAt": "2022-06-07T06:08:59Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHbyYm847mPEJ",
+          "commit": {
+            "abbreviatedOid": "c31a9fa"
+          },
+          "author": "bemasc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-06-08T14:32:20Z",
+          "updatedAt": "2022-06-08T14:32:21Z",
+          "comments": [
+            {
+              "originalPosition": 180,
+              "body": "OK, see https://github.com/ietf-wg-add/draft-ietf-add-split-horizon-authority/pull/3",
+              "createdAt": "2022-06-08T14:32:20Z",
+              "updatedAt": "2022-06-08T14:32:21Z"
+            }
+          ]
         }
       ]
     },
@@ -186,7 +226,7 @@
       "labels": [],
       "body": "From Paul Wouters:\r\n> >    Clients SHOULD\r\n> >    apply whatever acceptance rules they would otherwise apply when using\r\n> >    this resolver (e.g. checking the AD bit, validating RRSIGs).\r\n>\r\n...\r\n> This \"SHOULD\" should therefor be a \"MUST\"\r\n\r\nFrom Michael Richardson:\r\n> The document does a really poor job of defining split-horizon DNS.",
       "createdAt": "2022-06-06T18:59:38Z",
-      "updatedAt": "2022-06-06T20:27:31Z",
+      "updatedAt": "2022-06-08T14:48:06Z",
       "baseRepository": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
       "baseRefName": "main",
       "baseRefOid": "b53b5e0740f227a1f5de908481e5975059c241c6",
@@ -210,6 +250,86 @@
           "body": "",
           "createdAt": "2022-06-06T20:27:31Z",
           "updatedAt": "2022-06-06T20:27:31Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOHbyYm847dfNT",
+          "commit": {
+            "abbreviatedOid": "194b368"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-06-07T06:50:01Z",
+          "updatedAt": "2022-06-07T06:50:01Z",
+          "comments": [
+            {
+              "originalPosition": 53,
+              "body": "We can add the following normative text:\r\nA DNSSEC-validating client MUST apply the same validation policy to query the NS records for this purpose as it does to other queries.  A client that does not validate DNSSEC MUST apply the same policy (if any) to query the NS records as it does to other queries.",
+              "createdAt": "2022-06-07T06:50:01Z",
+              "updatedAt": "2022-06-07T06:50:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHbyYm847mWX7",
+          "commit": {
+            "abbreviatedOid": "194b368"
+          },
+          "author": "bemasc",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-06-08T14:48:06Z",
+          "updatedAt": "2022-06-08T14:48:06Z",
+          "comments": [
+            {
+              "originalPosition": 53,
+              "body": "Why is this an improvement over the text in this PR?  To me, \"MUST NOT relax\" seems very clear, and also more precise: in principle, I don't see a problem with clients applying a stricter validation policy to the NS probe than they do to normal resolution.  Also, there are other possible acceptance rules beyond \"validate DNSSEC\" or \"never validate\", e.g. Unbound's harden-algo-downgrade.",
+              "createdAt": "2022-06-08T14:48:06Z",
+              "updatedAt": "2022-06-08T14:48:06Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "PR_kwDOHbyYm845U0Pu",
+      "title": "Use parallel language for the PvD and split-horizon lookups",
+      "url": "https://github.com/ietf-wg-add/draft-ietf-add-split-horizon-authority/pull/3",
+      "state": "OPEN",
+      "author": "bemasc",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2022-06-08T14:32:11Z",
+      "updatedAt": "2022-06-08T15:31:49Z",
+      "baseRepository": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
+      "baseRefName": "main",
+      "baseRefOid": "b53b5e0740f227a1f5de908481e5975059c241c6",
+      "headRepository": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
+      "headRefName": "bemasc-authentication",
+      "headRefOid": "567166548d4d8699092164659eff0ed65416dae7",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOHbyYm847mpC6",
+          "commit": {
+            "abbreviatedOid": "5671665"
+          },
+          "author": "danwing",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-06-08T15:31:49Z",
+          "updatedAt": "2022-06-08T15:31:49Z",
           "comments": []
         }
       ]
