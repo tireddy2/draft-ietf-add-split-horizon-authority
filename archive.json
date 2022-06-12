@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-06-09T01:26:39.994221+00:00",
+  "timestamp": "2022-06-12T01:45:27.172671+00:00",
   "repo": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
   "labels": [
     {
@@ -226,7 +226,7 @@
       "labels": [],
       "body": "From Paul Wouters:\r\n> >    Clients SHOULD\r\n> >    apply whatever acceptance rules they would otherwise apply when using\r\n> >    this resolver (e.g. checking the AD bit, validating RRSIGs).\r\n>\r\n...\r\n> This \"SHOULD\" should therefor be a \"MUST\"\r\n\r\nFrom Michael Richardson:\r\n> The document does a really poor job of defining split-horizon DNS.",
       "createdAt": "2022-06-06T18:59:38Z",
-      "updatedAt": "2022-06-08T14:48:06Z",
+      "updatedAt": "2022-06-09T05:34:40Z",
       "baseRepository": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
       "baseRefName": "main",
       "baseRefOid": "b53b5e0740f227a1f5de908481e5975059c241c6",
@@ -291,6 +291,26 @@
               "updatedAt": "2022-06-08T14:48:06Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOHbyYm847phsD",
+          "commit": {
+            "abbreviatedOid": "194b368"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-06-09T05:34:40Z",
+          "updatedAt": "2022-06-09T05:34:40Z",
+          "comments": [
+            {
+              "originalPosition": 53,
+              "body": "I see your point. If DNSSEC is disabled by browsers for performance reasons or for validation failure due to incorrectly handling DNSSEC records by middle boxes. However, in our use case, organizations deploying split-horizon have every reason to correctly handle DNSSEC records otherwise DNSSEC validation will fail and the local resolver will not be used. DNSSEC can be conditionally enabled only for NS probe. ",
+              "createdAt": "2022-06-09T05:34:40Z",
+              "updatedAt": "2022-06-09T05:34:40Z"
+            }
+          ]
         }
       ]
     },
@@ -306,7 +326,7 @@
       "labels": [],
       "body": "",
       "createdAt": "2022-06-08T14:32:11Z",
-      "updatedAt": "2022-06-08T15:31:49Z",
+      "updatedAt": "2022-06-09T05:42:00Z",
       "baseRepository": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
       "baseRefName": "main",
       "baseRefOid": "b53b5e0740f227a1f5de908481e5975059c241c6",
@@ -330,6 +350,19 @@
           "body": "",
           "createdAt": "2022-06-08T15:31:49Z",
           "updatedAt": "2022-06-08T15:31:49Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOHbyYm847pi0V",
+          "commit": {
+            "abbreviatedOid": "5671665"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-06-09T05:42:00Z",
+          "updatedAt": "2022-06-09T05:42:00Z",
           "comments": []
         }
       ]
