@@ -1543,8 +1543,9 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
             DHCPv4, or DHCPv6.<a href="#section-7.1-4.1" class="pilcrow">¶</a>
 </li>
           <li class="normal ulEmpty" id="section-7.1-4.2">
-            <strong>Step 3-5</strong>: The client connects to the DNS
-            server learned from DNR (ns1.example.com), validates its certificate, and
+            <strong>Step 3-5</strong>: The client connects to ns1.example.com
+            using an encrypted transport as indicated in <span><a href="#I-D.ietf-add-dnr" class="xref">DNR</a> [<a href="#I-D.ietf-add-dnr" class="xref">I-D.ietf-add-dnr</a>]</span>, authenticating the server to
+            its name using TLS (<span>[<a href="#RFC8310" class="xref">RFC8310</a>], <a href="https://rfc-editor.org/rfc/rfc8310#section-8" class="relref">Section 8</a></span>), and
             sends it a query for the address of <code>pvd.example.com</code>.<a href="#section-7.1-4.2" class="pilcrow">¶</a>
 </li>
           <li class="normal ulEmpty" id="section-7.1-4.3">

@@ -368,9 +368,11 @@ Table of Contents
       DNR [I-D.ietf-add-dnr] and PvD [RFC8801], using one of DNR Router
       Solicitation, DHCPv4, or DHCPv6.
 
-      *Step 3-5*: The client connects to the DNS server learned from DNR
-      (ns1.example.com), validates its certificate, and sends it a query
-      for the address of pvd.example.com.
+      *Step 3-5*: The client connects to ns1.example.com using an
+      encrypted transport as indicated in DNR [I-D.ietf-add-dnr],
+      authenticating the server to its name using TLS ([RFC8310],
+      Section 8), and sends it a query for the address of
+      pvd.example.com.
 
       *Steps 6-7*: The client connects to the PvD server, validates its
       certificate, and retrieves the provisioning domain JSON
