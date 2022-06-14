@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-06-12T01:45:27.172671+00:00",
+  "timestamp": "2022-06-14T01:51:34.896132+00:00",
   "repo": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
   "labels": [
     {
@@ -226,7 +226,7 @@
       "labels": [],
       "body": "From Paul Wouters:\r\n> >    Clients SHOULD\r\n> >    apply whatever acceptance rules they would otherwise apply when using\r\n> >    this resolver (e.g. checking the AD bit, validating RRSIGs).\r\n>\r\n...\r\n> This \"SHOULD\" should therefor be a \"MUST\"\r\n\r\nFrom Michael Richardson:\r\n> The document does a really poor job of defining split-horizon DNS.",
       "createdAt": "2022-06-06T18:59:38Z",
-      "updatedAt": "2022-06-09T05:34:40Z",
+      "updatedAt": "2022-06-13T17:10:52Z",
       "baseRepository": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
       "baseRefName": "main",
       "baseRefOid": "b53b5e0740f227a1f5de908481e5975059c241c6",
@@ -237,7 +237,29 @@
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "bemasc",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Do you think this is a client configuration that we should reasonably\nexpect?  It seems to me that that behavior would be quite strange, although\nit is permissible. I think it's probably clearer for our examples to\nrepresent common configurations.\n\nOn Sun, Jun 12, 2022, 6:43 AM Tirumaleswar Reddy ***@***.***>\nwrote:\n\n> ***@***.**** commented on this pull request.\n> ------------------------------\n>\n> In draft-ietf-add-split-horizon-authority.xml\n> <https://github.com/ietf-wg-add/draft-ietf-add-split-horizon-authority/pull/2#discussion_r895152018>\n> :\n>\n> > @@ -300,10 +303,16 @@\n>        possible tamperproof resolution methods are presented below.</t>\n>        <section anchor=\"validating-external\">\n>          <name>Using a Pre-configured External Resolver</name>\n> -        <t>The client sends the NS query to a pre-configured resolver that is\n> -        external to the network, over a secure transport. Clients <bcp14>SHOULD</bcp14> apply\n> -        whatever acceptance rules they would otherwise apply when using this\n> -        resolver (e.g. checking the AD bit, validating RRSIGs).</t>\n> +        <t>This method applies only if the client is already configured with\n> +        a default resolution strategy that sends queries to a resolver outside\n> +        of the network over a secure transport.  That resolution strategy is\n> +        considered \"tamperproof\" because any actor who could modify the NS\n> +        response could already modify all of the user's other DNS responses.</t>\n> +        <t>To ensure that this assumption holds, clients <bcp14>MUST NOT</bcp14>\n> +        relax the acceptance rules they would otherwise apply when using this\n> +        resolver. For example, if the client would check the AD bit or\n> +        validate RRSIGs locally when using this resolver, it must also do so\n> +        when resolving NS records for this purpose.</t>\n>\n> Do you think the below example would be useful to add ?\n>\n> Another example could be a client can do DNSSEC validation for the NS\n> query used for this purpose even if it has disabled DNSSEC validation for\n> other DNS queries.\n>\n> \u2014\n> Reply to this email directly, view it on GitHub\n> <https://github.com/ietf-wg-add/draft-ietf-add-split-horizon-authority/pull/2#discussion_r895152018>,\n> or unsubscribe\n> <https://github.com/notifications/unsubscribe-auth/AABO3SOGRFF5XSO6SGRYWWDVOW5MJANCNFSM5YALCOMQ>\n> .\n> You are receiving this because you authored the thread.Message ID:\n> <ietf-wg-add/draft-ietf-add-split-horizon-authority/pull/2/review/1003592137\n> @github.com>\n>\n",
+          "createdAt": "2022-06-12T20:06:42Z",
+          "updatedAt": "2022-06-12T20:06:42Z"
+        },
+        {
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> \r\n\r\nI see two types of DNSSEC configurations (1) DNSSEC validations disabled for certain domains (see https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-server-2012-R2-and-2012/dn593632(v=ws.11) or use of negative trust anchors to disable DNSSEC validation for certain domains (2) DNSSEC disabled by default by clients like browsers  for performance reasons or to deal with validation failure due to incorrectly handling DNSSEC records by middle boxes or DNSSEC mis-configuration. For case 2, the new configuration offers better security than having to force DNSSEC for all domains and the end-user does not have to deal with DNSSEC validation failures. ",
+          "createdAt": "2022-06-13T09:35:13Z",
+          "updatedAt": "2022-06-13T09:35:13Z"
+        },
+        {
+          "author": "bemasc",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@tireddy2 Can we discuss it separately?  This PR is for changes in response to feedback in the ADD adoption thread.  Do you approve of this PR for that purpose?\r\n\r\nPerhaps you can open a new PR if you would like to add more example text.",
+          "createdAt": "2022-06-13T17:10:52Z",
+          "updatedAt": "2022-06-13T17:10:52Z"
+        }
+      ],
       "reviews": [
         {
           "id": "PRR_kwDOHbyYm847b99S",
@@ -309,6 +331,26 @@
               "body": "I see your point. If DNSSEC is disabled by browsers for performance reasons or for validation failure due to incorrectly handling DNSSEC records by middle boxes. However, in our use case, organizations deploying split-horizon have every reason to correctly handle DNSSEC records otherwise DNSSEC validation will fail and the local resolver will not be used. DNSSEC can be conditionally enabled only for NS probe. ",
               "createdAt": "2022-06-09T05:34:40Z",
               "updatedAt": "2022-06-09T05:34:40Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOHbyYm8470ZnJ",
+          "commit": {
+            "abbreviatedOid": "194b368"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2022-06-12T10:43:04Z",
+          "updatedAt": "2022-06-12T10:43:04Z",
+          "comments": [
+            {
+              "originalPosition": 53,
+              "body": "Do you think the below example would be useful to add ?\r\n\r\nAnother example could be a client can do DNSSEC validation for the NS query used for this purpose even if it has disabled DNSSEC validation for other DNS queries.",
+              "createdAt": "2022-06-12T10:43:04Z",
+              "updatedAt": "2022-06-12T10:43:04Z"
             }
           ]
         }
