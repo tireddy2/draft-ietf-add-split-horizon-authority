@@ -1036,7 +1036,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Reddy, et al.</td>
-<td class="center">Expires 8 December 2022</td>
+<td class="center">Expires 16 December 2022</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1049,12 +1049,12 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-add-split-horizon-authority-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-06-06" class="published">6 June 2022</time>
+<time datetime="2022-06-14" class="published">14 June 2022</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2022-12-08">8 December 2022</time></dd>
+<dd class="expires"><time datetime="2022-12-16">16 December 2022</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1115,7 +1115,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 December 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 16 December 2022.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1149,14 +1149,9 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2">
             <p id="section-toc.1-1.2.1" class="keepWithNext"><a href="#section-2" class="xref">2</a>.  <a href="#name-terminology" class="xref">Terminology</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.2.2.1">
-                <p id="section-toc.1-1.2.2.1.1" class="keepWithNext"><a href="#section-2.1" class="xref">2.1</a>.  <a href="#name-validated-split-horizon" class="xref">Validated Split-Horizon</a></p>
-</li>
-            </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.3">
-            <p id="section-toc.1-1.3.1"><a href="#section-3" class="xref">3</a>.  <a href="#name-scope" class="xref">Scope</a></p>
+            <p id="section-toc.1-1.3.1" class="keepWithNext"><a href="#section-3" class="xref">3</a>.  <a href="#name-scope" class="xref">Scope</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.4">
             <p id="section-toc.1-1.4.1"><a href="#section-4" class="xref">4</a>.  <a href="#name-local-domain-hint-mechanism" class="xref">Local Domain Hint Mechanisms</a></p>
@@ -1302,20 +1297,30 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
       "<span class="bcp14">OPTIONAL</span>" in this document are to be interpreted as described in BCP 14
       <span>[<a href="#RFC2119" class="xref">RFC2119</a>]</span><span>[<a href="#RFC8174" class="xref">RFC8174</a>]</span> when, and
       only when, they appear in all capitals, as shown here.<a href="#section-2-1" class="pilcrow">¶</a></p>
-<p id="section-2-2">This document makes use of the terms defined in <span>[<a href="#RFC8499" class="xref">RFC8499</a>]</span>. The term "Global DNS" is defined in <span>[<a href="#RFC8499" class="xref">RFC8499</a>]</span>.<a href="#section-2-2" class="pilcrow">¶</a></p>
-<p id="section-2-3">'Encrypted DNS' refers to a DNS protocol that provides an encrypted
-      channel between a DNS client and server (e.g., DoT, DoH, or DoQ).<a href="#section-2-3" class="pilcrow">¶</a></p>
-<p id="section-2-4">The term 'Validated Split-Horizon' is also defined.<a href="#section-2-4" class="pilcrow">¶</a></p>
-<section id="section-2.1">
-        <h3 id="name-validated-split-horizon">
-<a href="#section-2.1" class="section-number selfRef">2.1. </a><a href="#name-validated-split-horizon" class="section-name selfRef">Validated Split-Horizon</a>
-        </h3>
-<p id="section-2.1-1">A split horizon configuration for some name is considered
-        "validated" if the network client has confirmed that a parent of that
-        name has authorized the local network to serve its own responses for
-        that name. Such authorization generally extends to the entire subtree
-        of names below the authorization point.<a href="#section-2.1-1" class="pilcrow">¶</a></p>
-</section>
+<p id="section-2-2">This document makes use of the terms defined in <span>[<a href="#RFC8499" class="xref">RFC8499</a>]</span>, e.g. "Global DNS".  The following additional terms are
+      used throughout the document:<a href="#section-2-2" class="pilcrow">¶</a></p>
+<span class="break"></span><dl class="dlParallel" id="section-2-3">
+        <dt id="section-2-3.1">Encrypted DNS</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.2">A DNS protocol that provides an encrypted
+          channel between a DNS client and server (e.g., DoT, DoH, or DoQ).<a href="#section-2-3.2" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-3.3">Split-Horizon DNS</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.4">The DNS service provided by a resolver
+          that also acts as an authoritative server for some names, providing
+          resolution results that are meaningfully different from those in the
+          Global DNS. (See "Split DNS" in <span><a href="https://rfc-editor.org/rfc/rfc8499#section-6" class="relref">Section 6</a> of [<a href="#RFC8499" class="xref">RFC8499</a>]</span>.)<a href="#section-2-3.4" class="pilcrow">¶</a>
+</dd>
+        <dd class="break"></dd>
+<dt id="section-2-3.5">Validated Split-Horizon</dt>
+        <dd style="margin-left: 1.5em" id="section-2-3.6">A split horizon configuration for
+          some name is considered "validated" if the client has confirmed that
+          a parent of that name has authorized this resolver  to serve its own
+          responses for that name. Such authorization generally extends to the
+          entire subtree of names below the authorization point.<a href="#section-2-3.6" class="pilcrow">¶</a>
+</dd>
+      <dd class="break"></dd>
+</dl>
 </section>
 </div>
 <section id="section-3">
@@ -1468,10 +1473,16 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
         <h3 id="name-using-a-pre-configured-exte">
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-using-a-pre-configured-exte" class="section-name selfRef">Using a Pre-configured External Resolver</a>
         </h3>
-<p id="section-6.1-1">The client sends the NS query to a pre-configured resolver that is
-        external to the network, over a secure transport. Clients <span class="bcp14">SHOULD</span> apply
-        whatever acceptance rules they would otherwise apply when using this
-        resolver (e.g. checking the AD bit, validating RRSIGs).<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-1">This method applies only if the client is already configured with
+        a default resolution strategy that sends queries to a resolver outside
+        of the network over a secure transport.  That resolution strategy is
+        considered "tamperproof" because any actor who could modify the NS
+        response could already modify all of the user's other DNS responses.<a href="#section-6.1-1" class="pilcrow">¶</a></p>
+<p id="section-6.1-2">To ensure that this assumption holds, clients <span class="bcp14">MUST NOT</span>
+        relax the acceptance rules they would otherwise apply when using this
+        resolver. For example, if the client would check the AD bit or
+        validate RRSIGs locally when using this resolver, it must also do so
+        when resolving NS records for this purpose.<a href="#section-6.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="validating-dnssec">
@@ -1824,7 +1835,7 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <dl class="references">
 <dt id="I-D.ietf-add-dnr">[I-D.ietf-add-dnr]</dt>
         <dd>
-<span class="refAuthor">Boucadair, M.</span>, <span class="refAuthor">Reddy, T.</span>, <span class="refAuthor">Wing, D.</span>, <span class="refAuthor">Cook, N.</span>, and <span class="refAuthor">T. Jensen</span>, <span class="refTitle">"DHCP and Router Advertisement Options for the Discovery of Network-designated Resolvers (DNR)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-add-dnr-07</span>, <time datetime="2022-04-13" class="refDate">13 April 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-add-dnr-07">https://datatracker.ietf.org/doc/html/draft-ietf-add-dnr-07</a>&gt;</span>. </dd>
+<span class="refAuthor">Boucadair, M.</span>, <span class="refAuthor">Reddy, T.</span>, <span class="refAuthor">Wing, D.</span>, <span class="refAuthor">Cook, N.</span>, and <span class="refAuthor">T. Jensen</span>, <span class="refTitle">"DHCP and Router Advertisement Options for the Discovery of Network-designated Resolvers (DNR)"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-add-dnr-08</span>, <time datetime="2022-06-12" class="refDate">12 June 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-add-dnr-08">https://datatracker.ietf.org/doc/html/draft-ietf-add-dnr-08</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="I-D.ietf-ipsecme-add-ike">[I-D.ietf-ipsecme-add-ike]</dt>
         <dd>
