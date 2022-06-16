@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-06-14T01:51:34.896132+00:00",
+  "timestamp": "2022-06-16T01:38:31.360443+00:00",
   "repo": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
   "labels": [
     {
@@ -219,24 +219,26 @@
       "id": "PR_kwDOHbyYm845MCoF",
       "title": "Adjust text based on feedback on the adoption thread",
       "url": "https://github.com/ietf-wg-add/draft-ietf-add-split-horizon-authority/pull/2",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "bemasc",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "From Paul Wouters:\r\n> >    Clients SHOULD\r\n> >    apply whatever acceptance rules they would otherwise apply when using\r\n> >    this resolver (e.g. checking the AD bit, validating RRSIGs).\r\n>\r\n...\r\n> This \"SHOULD\" should therefor be a \"MUST\"\r\n\r\nFrom Michael Richardson:\r\n> The document does a really poor job of defining split-horizon DNS.",
       "createdAt": "2022-06-06T18:59:38Z",
-      "updatedAt": "2022-06-13T17:10:52Z",
+      "updatedAt": "2022-06-14T16:30:18Z",
       "baseRepository": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
       "baseRefName": "main",
       "baseRefOid": "b53b5e0740f227a1f5de908481e5975059c241c6",
       "headRepository": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
       "headRefName": "bemasc-feedback",
       "headRefOid": "194b3685ec31fc922e60c33f44880abd455b8827",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2022-06-14T16:30:15Z",
+      "mergedAt": "2022-06-14T16:30:15Z",
+      "mergedBy": "bemasc",
+      "mergeCommit": {
+        "oid": "0d49d104d0f289d78c975ff4ca098caedce34385"
+      },
       "comments": [
         {
           "author": "bemasc",
@@ -258,6 +260,13 @@
           "body": "@tireddy2 Can we discuss it separately?  This PR is for changes in response to feedback in the ADD adoption thread.  Do you approve of this PR for that purpose?\r\n\r\nPerhaps you can open a new PR if you would like to add more example text.",
           "createdAt": "2022-06-13T17:10:52Z",
           "updatedAt": "2022-06-13T17:10:52Z"
+        },
+        {
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "body": "> @tireddy2 Can we discuss it separately? This PR is for changes in response to feedback in the ADD adoption thread. Do you approve of this PR for that purpose?\r\n\r\nYes, changes look good to me. \r\n\r\n> \r\n> Perhaps you can open a new PR if you would like to add more example text.\r\n\r\nWorks for me. I proposed this text to address the comment from the WG on whether client implementations will enable DNSSEC to support the proposed mechanism.   ",
+          "createdAt": "2022-06-14T03:51:17Z",
+          "updatedAt": "2022-06-14T03:51:37Z"
         }
       ],
       "reviews": [
@@ -353,6 +362,19 @@
               "updatedAt": "2022-06-12T10:43:04Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOHbyYm8476gVb",
+          "commit": {
+            "abbreviatedOid": "194b368"
+          },
+          "author": "tireddy2",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2022-06-14T03:51:58Z",
+          "updatedAt": "2022-06-14T03:51:58Z",
+          "comments": []
         }
       ]
     },
@@ -361,24 +383,26 @@
       "id": "PR_kwDOHbyYm845U0Pu",
       "title": "Use parallel language for the PvD and split-horizon lookups",
       "url": "https://github.com/ietf-wg-add/draft-ietf-add-split-horizon-authority/pull/3",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "bemasc",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2022-06-08T14:32:11Z",
-      "updatedAt": "2022-06-09T05:42:00Z",
+      "updatedAt": "2022-06-14T16:30:33Z",
       "baseRepository": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
       "baseRefName": "main",
       "baseRefOid": "b53b5e0740f227a1f5de908481e5975059c241c6",
       "headRepository": "ietf-wg-add/draft-ietf-add-split-horizon-authority",
       "headRefName": "bemasc-authentication",
       "headRefOid": "567166548d4d8699092164659eff0ed65416dae7",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2022-06-14T16:30:30Z",
+      "mergedAt": "2022-06-14T16:30:30Z",
+      "mergedBy": "bemasc",
+      "mergeCommit": {
+        "oid": "cae90d301cfcd7654e32e99054c7dfb8563e0c72"
+      },
       "comments": [],
       "reviews": [
         {
